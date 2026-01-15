@@ -11,14 +11,13 @@ export async function GET(req) {
   }
 
   const pdfPath = path.join(process.cwd(), "public", "results.pdf");
-  const dataBuffer = fs.readFileSync(pdfPath);
-  const data = await pdf(dataBuffer);
+  const buffer = fs.readFileSync(pdfPath);
+  const data = await pdf(buffer);
 
   const lines = data.text.split("\n");
 
-  for (let line of lines) {
+  for (const line of lines) {
     const parts = line.trim().split(/\s+/);
-
     if (parts.includes(psid)) {
       const i = parts.indexOf(psid);
 
